@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    script(src='/javascripts/d3.js')
+
+  body
+    form(name="chooseStore", method="post")
+      select(name= "store_name")
+        each val in wanxiangcheng
+          option(value= val._id)= val._id
+      select(name= "floor")
+        option(disabled selected value)
+        each val in floorNums
+          option(value= val._id)= val._id
+        input(type="submit" value="Submit")
+    svg#drawingFunction
+    if oneStoreAllJson
+      script.
+        window.workflowData = !{JSON.stringify(oneStoreAllJson)};
+    else
+      script.
+        window.workflowData2 = !{JSON.stringify(thisFloorData)};
+    script(src='/javascripts/drawing.js')

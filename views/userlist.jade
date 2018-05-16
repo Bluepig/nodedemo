@@ -8,14 +8,28 @@ html
 
   body
     form(name="chooseStore", method="post")
-      select(name= "store_name")
+      span 店名:
+      select(name= "store_name" id= "store_name")
+        option(selected value)
         each val in wanxiangcheng
           option(value= val._id)= val._id
-      select(name= "floor")
+      span 层数:
+      select(name= "floor" id= "floor_name")
         option(disabled selected value)
         each val in floorNums
           option(value= val._id)= val._id
+      span biz_cat1:
+      select(name= "Biz_cat1")
+        option(selected value)
+        each val in biz1s
+          option(value= val._id)= val._id
+      span biz_cat2:
+      select(name= "Biz_cat2")
+        option(selected value)
+        each val in biz2s
+          option(value= val._id)= val._id
         input(type="submit" value="Submit")
+
     svg#drawingFunction
     if oneStoreAllJson
       script.
@@ -23,4 +37,5 @@ html
     else
       script.
         window.workflowData2 = !{JSON.stringify(thisFloorData)};
+        window.workflowMax = !{JSON.stringify(thisMax)};
     script(src='/javascripts/drawing.js')

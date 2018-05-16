@@ -4,7 +4,9 @@ var router = express.Router();
 var userModel = require('../models/usermodel.js');
 var storeIds;
 var floorNums;
+var biz1s, biz2s;
 var thisFloorIDs = [];
+
 function sortID(a,b) {
   if (a._id < b._id )
   return -1;
@@ -33,16 +35,36 @@ userModel.aggregate([
   floorNums.sort(sortID);
 });
 
+userModel.aggregate([
+  {$sort:{"Biz_cat1":1}},
+  {$group:{"_id":"$Biz_cat1"}}
+]
+).exec(function ( e, d ){
+  biz1s = d;
+});
+
+
+userModel.aggregate([
+  {$sort:{"Biz_cat2":1}},
+  {$group:{"_id":"$Biz_cat2"}}
+]
+).exec(function ( e, d ){
+  biz2s = d;
+});
+
 res.render('userlist',{
   title: "Wanxiangcheng Data Visualizations",
   wanxiangcheng: storeIds,
-  floorNums : floorNums
+  floorNums : floorNums,
+  biz1s : biz1s,
+  biz2s : biz2s
 })
 });
 
 var haha = [];
 router.post('/list', function(req, res){
-  if (!req.body.floor) {
+
+  if (req.body.store_name) {
     userModel.find({"store_id":req.body.store_name }).exec(function(e,d){
       var thisStoreSales = [];
       for (var i = 0; i < d.length; i++) {
@@ -55,13 +77,29 @@ router.post('/list', function(req, res){
       res.render('userlist',{
         wanxiangcheng: storeIds,
         floorNums : floorNums,
-        oneStoreAllJson: thisStoreSales
+        oneStoreAllJson: thisStoreSales,
+        biz1s : biz1s,
+        biz2s : biz2s
       })
     })
   } else{
+    console.log("ths is req.body");
+    console.log(req.body);
+    var dic = {};
+      if (req.body.floor) {
+        dic["floor"] = req.body.floor;
+      }
+      if (req.body.Biz_cat1) {
+        dic["Biz_cat1"] = req.body.Biz_cat1;
+      }
+      if (req.body.Biz_cat2) {
+        dic["Biz_cat2"] = req.body.Biz_cat2;
+      }
 
-    userModel.find({"floor":req.body.floor }).sort({"store_id" : -1}).exec(function(e,d){
-      console.log(d);
+      console.log(dic)
+    userModel.find(dic).sort({"store_id" : -1}).exec(function(e,d){
+
+      var salesMax = 0;
       var tempId = [];
       var objArrs = [];
       for (var i = 0; i < d.length; i++) {
@@ -77,9 +115,15 @@ router.post('/list', function(req, res){
           };
           temp.salesObjs.push(tempObj);
           objArrs.push(temp);
+          if (d[i].sales > salesMax) {
+            salesMax = d[i].sales;
+          }
         }
         else{
           if (d[i].store_id == tempId[tempId.length-1]) {
+            if (d[i].sales > salesMax) {
+              salesMax = d[i].sales;
+            }
             var tempObj = {
               date: d[i].date.toJSON(),
               sales: d[i].sales
@@ -87,6 +131,9 @@ router.post('/list', function(req, res){
             objArrs[objArrs.length-1].salesObjs.push(tempObj);
           }
           else{
+            if (d[i].sales > salesMax) {
+              salesMax = d[i].sales;
+            }
             var temp = {
               store_id : d[i].store_id,
               salesObjs : []
@@ -103,11 +150,14 @@ router.post('/list', function(req, res){
 
 
       }
-      console.log(objArrs.length);
+
       res.render('userlist',{
         wanxiangcheng: storeIds,
         floorNums : floorNums,
-        thisFloorData: objArrs
+        thisFloorData: objArrs,
+        thisMax : salesMax,
+        biz1s : biz1s,
+        biz2s : biz2s
 
       })
     });

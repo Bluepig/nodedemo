@@ -6,7 +6,6 @@ function drawdraw(ddd) {
   g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   var parseTime = d3.utcParse("%Y-%m-%dT%H:%M:%S.%LZ");
-
   var x = d3.scaleTime()
   .rangeRound([0, width]);
   var names = [];
@@ -18,18 +17,8 @@ function drawdraw(ddd) {
           names.push(biz2data[i].children[j].name);
         }
       }
-
     }
   }
-    console.log(names);
-  // for (var i = 0; i < ddd.length; i++) {
-  //   for (var j = 0; j < biz2ar.length; j++) {
-  //     if (biz2ar[j].) {
-  //
-  //     }
-  //   }
-  //
-  // }
   var y = d3.scaleLinear()
   .rangeRound([height, 0]);
   var dataAll = [];

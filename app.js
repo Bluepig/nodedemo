@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var ajaxRouter = require('./routes/ajax');
 //add mongoose connection
 var mongoose = require('mongoose');
@@ -36,7 +35,6 @@ app.use('/css',express.static(path.join(__dirname, 'public/stylesheets')));
 app.use('/js',express.static(path.join(__dirname, 'public/javascripts')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/ajax', ajaxRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

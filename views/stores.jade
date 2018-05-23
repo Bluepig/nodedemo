@@ -4,17 +4,12 @@ html
     title= title
     link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.css")
     link(rel='stylesheet', href='/css/style.css')
-
     script(src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js")
     script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js")
-
     script(src='/js/d3.js')
     script(src='/js/drawing2.js')
-
   body
-
     input(id="submitForm" type="submit" value="Submit")
-
     .sideContainer.accordion
       each val in biz1ar
         .card
@@ -27,14 +22,11 @@ html
                 li
                   button.btn.btn-primary.btn-block.mb-1(type="submit")= val2
 
-
     div(class="sideContainer2")
       div.co1
         ul.co22
       div.co2
         ul.co11
-
-
     svg#drawingFunction
     script.
       window.biz2data = !{JSON.stringify(biz2ar)}

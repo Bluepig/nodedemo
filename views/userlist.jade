@@ -2,40 +2,40 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
-    script(src='/javascripts/d3.js')
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.css")
+    link(rel='stylesheet', href='/css/style.css')
+
+    script(src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js")
+
+    script(src='/js/d3.js')
+    script(src='/js/drawing2.js')
 
   body
-    form(name="chooseStore", method="post")
-      span 店名:
-      select(name= "store_name" id= "store_name")
-        option(selected value)
-        each val in wanxiangcheng
-          option(value= val._id)= val._id
-      span 层数:
-      select(name= "floor" id= "floor_name")
-        option(disabled selected value)
-        each val in floorNums
-          option(value= val._id)= val._id
-      span biz_cat1:
-      select(name= "Biz_cat1")
-        option(selected value)
-        each val in biz1s
-          option(value= val._id)= val._id
-      span biz_cat2:
-      select(name= "Biz_cat2")
-        option(selected value)
-        each val in biz2s
-          option(value= val._id)= val._id
-        input(type="submit" value="Submit")
+
+    input(id="submitForm" type="submit" value="Submit")
+
+    .sideContainer.accordion
+      each val in biz1ar
+        .card
+          div(id=val.name1 class="card-header")
+            h5.mb-0
+              button(class="btn btn-link" type="button" data-toggle="collapse" data-target="#"+val.name2 aria-expanded="true" aria-controls=val.name2)= val.biz_cat1
+          div(id=val.name2 class = "collapse card-body" aria-labelledby=val.name1 data-parent="#accordionExample")
+            ul.bizcat2
+              each val2 in val.children
+                li
+                  button.btn.btn-primary.btn-block.mb-1(type="submit")= val2
+
+
+    div(class="sideContainer2")
+      div.co1
+        ul.co22
+      div.co2
+        ul.co11
+
 
     svg#drawingFunction
-    if oneStoreAllJson
-      script.
-        window.workflowData = !{JSON.stringify(oneStoreAllJson)};
-    else
-      script.
-        window.workflowData2 = !{JSON.stringify(thisFloorData)};
-        window.workflowMax = !{JSON.stringify(thisMax)};
-    script(src='/javascripts/drawing.js')
+    script.
+      window.biz2data = !{JSON.stringify(biz2ar)}
+    script(src='/js/main.js')

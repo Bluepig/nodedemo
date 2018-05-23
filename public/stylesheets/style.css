@@ -3,30 +3,6 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-
-h1{
-  color:blue;
-}
-
-a {color: black;margin: 5px; text-decoration: none;}
-
-.dropdown-menu li:hover .sub-menu {
-    visibility: visible;
-}
-
-.dropdown:hover .dropdown-menu {
-    display: block;
-    margin-top: 0;
-}
-
-.dropdown-menu .sub-menu {
-    left: 100%;
-    position: absolute;
-    top: 0;
-    visibility: hidden;
-    margin-top: -1px;
-}
-
 .axis--x path {
   display: none;
 }
@@ -41,4 +17,47 @@ a {color: black;margin: 5px; text-decoration: none;}
   width:960px;
   height:500px;
   border:1px solid black;
+  float:right;
+  margin-right:20px;
+}
+#drawingDIV{
+  width:960px;
+  height:500px;
+  border:1px solid black;
+}
+#shabi {
+  float:left;
+  width:16%;
+  margin-left:3%;
+}
+
+
+.sideContainer{
+  float:left;
+  width:18%;
+}
+.sideContainer2{
+  float:left;
+  width:15%;
+
+  border:1px dotted red;
+}
+.co1{
+  position:relative;
+  height: 50%;
+  border-bottom:1px dotted black;
+}
+.co2{
+  position:relative;
+  height: 50%;
+}
+.bizcat2{
+  padding-left: 0;
+}
+.bizcat2 li{
+  width:80%;
+  list-style-type: none;
+}
+.liness{
+  color:red!important;
 }

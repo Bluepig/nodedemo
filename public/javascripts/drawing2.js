@@ -48,6 +48,7 @@ function drawdraw(ddd) {
     for (var i = 0; i < ddd.length; i++) {
       if (ddd[i].salesmax>tempMax){
         tempMax = ddd[i].salesmax;
+        
       }
     }
     x.domain(d3.extent([new Date(2017, 8, 18), new Date(2018, 2, 28)]));

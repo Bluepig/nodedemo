@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var ajaxRouter = require('./routes/ajax');
+var svgRouter = require('./routes/svg');
 //add mongoose connection
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/nodekb');
@@ -33,9 +34,11 @@ app.use('/',express.static(path.join(__dirname, 'public')));
 app.use('/node_modules',express.static(path.join(__dirname, 'node_modules')));
 app.use('/css',express.static(path.join(__dirname, 'public/stylesheets')));
 app.use('/js',express.static(path.join(__dirname, 'public/javascripts')));
+app.use('/images',express.static(path.join(__dirname, 'public/images')));
 
 app.use('/', indexRouter);
 app.use('/ajax', ajaxRouter);
+app.use('/svg', svgRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

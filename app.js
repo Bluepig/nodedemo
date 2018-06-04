@@ -31,7 +31,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/',express.static(path.join(__dirname, 'public')));
-app.use('/node_modules',express.static(path.join(__dirname, 'node_modules')));
 app.use('/css',express.static(path.join(__dirname, 'public/stylesheets')));
 app.use('/js',express.static(path.join(__dirname, 'public/javascripts')));
 app.use('/images',express.static(path.join(__dirname, 'public/images')));

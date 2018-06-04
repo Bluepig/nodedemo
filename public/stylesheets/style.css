@@ -20,16 +20,6 @@ body {
   float:right;
   margin-right:20px;
 }
-#drawingDIV{
-  width:960px;
-  height:500px;
-  border:1px solid black;
-}
-#shabi {
-  float:left;
-  width:16%;
-  margin-left:3%;
-}
 
 
 .sideContainer{

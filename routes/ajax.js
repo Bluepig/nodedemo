@@ -30,13 +30,8 @@ router.post('/', function(req, res){
         });
       }
     });
-
     res.send(objArrs);
-
   });
-
-
-
 });
 
 module.exports = router;

@@ -5,7 +5,6 @@ $(document).ready(function() {
       event.preventDefault();
       arr = [];
       $(".liness").each(function(el){
-
         arr.push($(this).attr('id'));
       });
 

@@ -53,20 +53,5 @@ storelinks.aggregate([{$group:{"_id":"$to_node",parents: {
 
           });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 });
 module.exports = router;

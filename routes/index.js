@@ -1,10 +1,7 @@
 var express = require('express');
-
 var router = express.Router();
 var userModel = require('../models/usermodel.js');
 var storename = require('../models/storename.js');
-
-
 var biz1s, biz2s,biz2ar , biz1ar;
 
 router.get('/', function(req, res) {
@@ -18,7 +15,6 @@ storename.aggregate([
   for (var i = 0; i < biz2s.length; i++) {
     biz2ar.push({biz_cat2:biz2s[i]._id, children:[]});
   }
-
 });
 
 biz1ar= [];
